@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.zidolite.browser" version="1.0.0" xmlns="http://apache.org">
+    <name>Zidolite Browser</name>
+    <description>A Professional Fast Mobile Browser</description>
+    <author email="arafatisaac539@gmail.com">Zidokia Company</author>
+    
+    <content src="index.html" />
+    
+    <plugin name="cordova-plugin-inappbrowser" spec="^6.0.0" />
+    
+    <access origin="*" />
+    <allow-navigation href="*" />
+    <allow-intent href="*" />
+    
+    <preference name="ScrollEnabled" value="true" />
+</widget>
