@@ -1,0 +1,784 @@
+/* =====================================================
+   ZIDOLITE BROWSER
+   MAIN CSS
+   ===================================================== */
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f7fb;
+    color: #111827;
+}
+
+/* =====================================================
+   DARK MODE
+   ===================================================== */
+
+body.dark {
+    background: #111827;
+    color: #f9fafb;
+}
+
+/* =====================================================
+   TOP TOOLBAR
+   ===================================================== */
+
+#toolbar {
+    width: 100%;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 4px;
+    padding: 6px 7px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 2px 12px rgba(0, 0, 0, 0.12);
+
+    position: sticky;
+    top: 0;
+
+    z-index: 1000;
+}
+
+body.dark #toolbar {
+    background: #1f2937;
+}
+
+/* =====================================================
+   LOGO
+   ===================================================== */
+
+.logo {
+    font-size: 16px;
+    font-weight: 800;
+
+    white-space: nowrap;
+
+    margin-right: 2px;
+
+    color: #111827;
+}
+
+body.dark .logo {
+    color: #ffffff;
+}
+
+/* =====================================================
+   TOOLBAR ICON BUTTONS
+   ===================================================== */
+
+.icon {
+    width: 36px;
+    height: 36px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: transparent;
+
+    font-size: 19px;
+
+    flex-shrink: 0;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease;
+}
+
+.icon:hover {
+    background: #f0f2f5;
+}
+
+.icon:active {
+    background: #e5e7eb;
+    transform: scale(0.94);
+}
+
+body.dark .icon {
+    color: #ffffff;
+}
+
+body.dark .icon:hover {
+    background: #374151;
+}
+
+/* =====================================================
+   ADDRESS BAR
+   ===================================================== */
+
+#address {
+    flex: 1;
+
+    min-width: 40px;
+
+    height: 38px;
+
+    border: none;
+    outline: none;
+
+    border-radius: 22px;
+
+    padding: 0 14px;
+
+    background: #f0f2f5;
+
+    color: #111827;
+
+    font-size: 14px;
+
+    transition:
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+#address:focus {
+    background: #ffffff;
+
+    box-shadow:
+        inset 0 0 0 2px #2563eb;
+}
+
+body.dark #address {
+    background: #374151;
+    color: #ffffff;
+}
+
+body.dark #address:focus {
+    background: #374151;
+    box-shadow:
+        inset 0 0 0 2px #60a5fa;
+}
+
+/* =====================================================
+   HOME PAGE
+   ===================================================== */
+
+#home {
+    width: 100%;
+
+    min-height:
+        calc(100vh - 60px);
+
+    padding:
+        55px 14px 90px;
+
+    text-align: center;
+}
+
+/* =====================================================
+   MAIN TITLE
+   ===================================================== */
+
+.title {
+    font-size: 32px;
+
+    font-weight: 800;
+
+    margin-bottom: 30px;
+
+    letter-spacing: -0.5px;
+}
+
+/* =====================================================
+   SEARCH ENGINE SELECTOR
+   ===================================================== */
+
+.engineLine {
+    max-width: 650px;
+
+    margin:
+        0 auto 7px;
+
+    text-align: left;
+
+    font-size: 12px;
+
+    color: #4b5563;
+}
+
+body.dark .engineLine {
+    color: #d1d5db;
+}
+
+.engineLine button {
+    border: none;
+
+    background: transparent;
+
+    color: #2563eb;
+
+    font-weight: 700;
+
+    font-size: 12px;
+
+    padding: 4px;
+
+    cursor: pointer;
+}
+
+/* =====================================================
+   ENGINE MENU
+   ===================================================== */
+
+#engines {
+    display: none;
+
+    max-width: 650px;
+
+    margin: 5px auto;
+
+    background: #ffffff;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 5px 25px rgba(0, 0, 0, 0.18);
+
+    text-align: left;
+
+    animation: menuOpen 0.18s ease;
+}
+
+body.dark #engines {
+    background: #1f2937;
+}
+
+@keyframes menuOpen {
+
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+.engine {
+    width: 100%;
+
+    padding: 14px 16px;
+
+    border: none;
+
+    background: transparent;
+
+    color: inherit;
+
+    text-align: left;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease;
+}
+
+.engine:hover {
+    background: #f3f4f6;
+}
+
+.engine:active {
+    background: #e5e7eb;
+}
+
+body.dark .engine:hover {
+    background: #374151;
+}
+
+/* =====================================================
+   SEARCH BOX
+   ===================================================== */
+
+.search {
+    max-width: 650px;
+
+    height: 56px;
+
+    margin: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    padding-left: 18px;
+
+    background: #ffffff;
+
+    border-radius: 30px;
+
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.12);
+
+    transition:
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.search:focus-within {
+    box-shadow:
+        0 5px 25px rgba(37, 99, 235, 0.22);
+}
+
+body.dark .search {
+    background: #374151;
+}
+
+/* =====================================================
+   SEARCH INPUT
+   ===================================================== */
+
+#query {
+    flex: 1;
+
+    min-width: 0;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: inherit;
+
+    font-size: 16px;
+
+    padding: 0 8px 0 0;
+}
+
+#query::placeholder {
+    color: #9ca3af;
+}
+
+/* =====================================================
+   SEARCH BUTTON
+   ===================================================== */
+
+.searchButton {
+    width: 50px;
+    height: 50px;
+
+    border: none;
+
+    background: transparent;
+
+    font-size: 21px;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease;
+}
+
+.searchButton:hover {
+    background: #f3f4f6;
+}
+
+.searchButton:active {
+    background: #e5e7eb;
+
+    transform: scale(0.92);
+}
+
+body.dark .searchButton:hover {
+    background: #4b5563;
+}
+
+/* =====================================================
+   WEBSITE SHORTCUTS
+   ===================================================== */
+
+.shortcuts {
+    max-width: 700px;
+
+    margin: 38px auto;
+
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+}
+
+/* =====================================================
+   SHORTCUT BUTTON
+   ===================================================== */
+
+.shortcut {
+    min-width: 90px;
+
+    padding: 14px 18px;
+
+    border: none;
+
+    border-radius: 13px;
+
+    background: #ffffff;
+
+    color: #111827;
+
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.10);
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        background 0.15s ease;
+}
+
+.shortcut:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.14);
+}
+
+.shortcut:active {
+    transform: scale(0.95);
+}
+
+body.dark .shortcut {
+    background: #374151;
+
+    color: #ffffff;
+}
+
+body.dark .shortcut:hover {
+    background: #4b5563;
+}
+
+/* =====================================================
+   SETTINGS PANEL
+   ===================================================== */
+
+#settings {
+    display: none;
+
+    position: fixed;
+
+    right: 8px;
+
+    top: 65px;
+
+    width:
+        min(330px, calc(100% - 16px));
+
+    max-height:
+        calc(100vh - 75px);
+
+    overflow-y: auto;
+
+    padding: 18px;
+
+    background: #ffffff;
+
+    color: #111827;
+
+    border-radius: 17px;
+
+    box-shadow:
+        0 8px 35px rgba(0, 0, 0, 0.30);
+
+    z-index: 5000;
+
+    animation: settingsOpen 0.18s ease;
+}
+
+@keyframes settingsOpen {
+
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+body.dark #settings {
+    background: #1f2937;
+
+    color: #ffffff;
+}
+
+/* =====================================================
+   SETTINGS TITLE
+   ===================================================== */
+
+#settings h3 {
+    margin-top: 0;
+
+    margin-bottom: 8px;
+
+    font-size: 18px;
+}
+
+/* =====================================================
+   SETTING ITEM
+   ===================================================== */
+
+.setting {
+    padding: 15px 0;
+
+    border-bottom:
+        1px solid #e5e7eb;
+}
+
+body.dark .setting {
+    border-color: #374151;
+}
+
+.setting b {
+    font-size: 14px;
+}
+
+/* =====================================================
+   SETTINGS BUTTONS
+   ===================================================== */
+
+.setting button {
+    margin-top: 8px;
+
+    padding:
+        9px 12px;
+
+    border:
+        1px solid #d1d5db;
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #111827;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease;
+}
+
+.setting button:hover {
+    background: #f3f4f6;
+}
+
+.setting button:active {
+    transform: scale(0.96);
+}
+
+body.dark .setting button {
+    background: #374151;
+
+    color: #ffffff;
+
+    border-color: #4b5563;
+}
+
+body.dark .setting button:hover {
+    background: #4b5563;
+}
+
+/* =====================================================
+   SETTINGS CLOSE BUTTON
+   ===================================================== */
+
+#settings > button:last-child {
+    margin-top: 15px;
+
+    padding:
+        10px 16px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #2563eb;
+
+    color: white;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+#settings > button:last-child:active {
+    transform: scale(0.96);
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer {
+    position: fixed;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: 6px;
+
+    text-align: center;
+
+    font-size: 9px;
+
+    opacity: 0.55;
+
+    pointer-events: none;
+
+    line-height: 1.45;
+
+}
+
+/* =====================================================
+   SCROLLBAR
+   ===================================================== */
+
+#settings::-webkit-scrollbar,
+#home::-webkit-scrollbar {
+    width: 5px;
+}
+
+#settings::-webkit-scrollbar-thumb,
+#home::-webkit-scrollbar-thumb {
+    background: #9ca3af;
+
+    border-radius: 10px;
+}
+
+/* =====================================================
+   MOBILE OPTIMIZATION
+   ===================================================== */
+
+@media (max-width: 600px) {
+
+    #toolbar {
+        height: 58px;
+
+        padding:
+            5px;
+    }
+
+    .logo {
+        font-size: 14px;
+    }
+
+    .icon {
+        width: 32px;
+        height: 32px;
+
+        font-size: 17px;
+    }
+
+    #address {
+        height: 36px;
+
+        font-size: 13px;
+
+        padding:
+            0 11px;
+    }
+
+    #home {
+        padding:
+            48px 12px 90px;
+    }
+
+    .title {
+        font-size: 29px;
+
+        margin-bottom: 27px;
+    }
+
+    .search {
+        height: 54px;
+    }
+
+    .shortcut {
+        min-width: 82px;
+
+        padding:
+            12px 14px;
+    }
+
+}
+
+/* =====================================================
+   VERY SMALL DEVICES
+   ===================================================== */
+
+@media (max-width: 380px) {
+
+    .logo {
+        display: none;
+    }
+
+    #toolbar {
+        gap: 2px;
+    }
+
+    .icon {
+        width: 31px;
+        height: 31px;
+    }
+
+    #home {
+        padding-top: 40px;
+    }
+
+    .title {
+        font-size: 26px;
+    }
+
+}
+
+/* =====================================================
+   SAFE AREA FOR MODERN ANDROID DEVICES
+   ===================================================== */
+
+@supports (padding-top: env(safe-area-inset-top)) {
+
+    #toolbar {
+
+        padding-top:
+            calc(6px + env(safe-area-inset-top));
+
+        height:
+            calc(60px + env(safe-area-inset-top));
+
+    }
+
+}
