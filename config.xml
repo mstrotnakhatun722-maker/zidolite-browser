@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.zidolite.browser" version="1.0.0" xmlns="http://apache.org">
+<widget id="com.zidolite.browser" xmlns="http://www.w3.org/ns/widgets" version="1.0.0">
     <name>Zidolite Browser</name>
     <description>A Professional Fast Mobile Browser</description>
     <author email="arafatisaac539@gmail.com">Zidokia Company</author>
