@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
+
+<title>Zidolite Browser</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+    margin:0;
+    padding:0;
+    width:100%;
+    min-height:100%;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f5f7fb;
+    color:#111827;
+}
+
+body.dark{
+    background:#111827;
+    color:white;
+}
+
+
+/* =========================
+   TOP BAR
+========================= */
+
+#toolbar{
+
+    height:60px;
+    width:100%;
+
+    display:flex;
+    align-items:center;
+
+    gap:4px;
+    padding:6px;
+
+    background:white;
+
+    box-shadow:
+    0 2px 12px rgba(0,0,0,.12);
+
+    position:sticky;
+    top:0;
+
+    z-index:1000;
+}
+
+.dark #toolbar{
+    background:#1f2937;
+}
+
+
+.logo{
+
+    font-size:16px;
+    font-weight:800;
+
+    white-space:nowrap;
+
+}
+
+
+.icon{
+
+    width:36px;
+    height:36px;
+
+    border:none;
+    border-radius:50%;
+
+    background:transparent;
+
+    font-size:19px;
+
+    flex-shrink:0;
+
+}
+
+
+.icon:active{
+    background:#e5e7eb;
+}
+
+
+#address{
+
+    flex:1;
+
+    min-width:40px;
+
+    height:38px;
+
+    border:none;
+    outline:none;
+
+    border-radius:22px;
+
+    padding:
+    0 14px;
+
+    background:#f0f2f5;
+
+    color:#111827;
+
+    font-size:14px;
+
+}
+
+
+.dark #address{
+
+    background:#374151;
+
+    color:white;
+
+}
+
+
+/* =========================
+   HOME
+========================= */
+
+#home{
+
+    min-height:
+    calc(100vh - 60px);
+
+    padding:
+    55px 14px 90px;
+
+    text-align:center;
+
+}
+
+
+.title{
+
+    font-size:32px;
+
+    font-weight:800;
+
+    margin-bottom:30px;
+
+}
+
+
+/* =========================
+   SEARCH ENGINE
+========================= */
+
+.engineLine{
+
+    max-width:650px;
+
+    margin:
+    0 auto 7px;
+
+    text-align:left;
+
+    font-size:12px;
+
+}
+
+
+.engineLine button{
+
+    border:none;
+
+    background:none;
+
+    color:#2563eb;
+
+    font-weight:bold;
+
+}
+
+
+#engines{
+
+    display:none;
+
+    max-width:650px;
+
+    margin:5px auto;
+
+    background:white;
+
+    border-radius:14px;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 5px 25px rgba(0,0,0,.18);
+
+    text-align:left;
+
+}
+
+
+.dark #engines{
+
+    background:#1f2937;
+
+}
+
+
+.engine{
+
+    width:100%;
+
+    padding:14px;
+
+    border:none;
+
+    background:transparent;
+
+    color:inherit;
+
+    text-align:left;
+
+    font-size:14px;
+
+}
+
+
+.engine:active{
+
+    background:#e5e7eb;
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+.search{
+
+    max-width:650px;
+
+    height:56px;
+
+    margin:auto;
+
+    display:flex;
+
+    align-items:center;
+
+    padding-left:18px;
+
+    background:white;
+
+    border-radius:30px;
+
+    box-shadow:
+    0 4px 20px rgba(0,0,0,.12);
+
+}
+
+
+.dark .search{
+
+    background:#374151;
+
+}
+
+
+#query{
+
+    flex:1;
+
+    min-width:0;
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    color:inherit;
+
+    font-size:16px;
+
+}
+
+
+.searchButton{
+
+    width:50px;
+
+    height:50px;
+
+    border:none;
+
+    background:transparent;
+
+    font-size:21px;
+
+}
+
+
+/* =========================
+   WEBSITE SHORTCUTS
+========================= */
+
+.shortcuts{
+
+    max-width:700px;
+
+    margin:38px auto;
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+}
+
+
+.shortcut{
+
+    min-width:90px;
+
+    padding:14px 18px;
+
+    border:none;
+
+    border-radius:13px;
+
+    background:white;
+
+    color:#111827;
+
+    box-shadow:
+    0 3px 12px rgba(0,0,0,.10);
+
+    font-size:13px;
+
+}
+
+
+.dark .shortcut{
+
+    background:#374151;
+
+    color:white;
+
+}
+
+
+/* =========================
+   SETTINGS
+========================= */
+
+#settings{
+
+    display:none;
+
+    position:fixed;
+
+    right:8px;
+
+    top:65px;
+
+    width:
+    min(330px,calc(100% - 16px));
+
+    max-height:
+    calc(100vh - 75px);
+
+    overflow:auto;
+
+    padding:18px;
+
+    background:white;
+
+    color:#111827;
+
+    border-radius:17px;
+
+    box-shadow:
+    0 8px 35px rgba(0,0,0,.30);
+
+    z-index:5000;
+
+}
+
+
+.dark #settings{
+
+    background:#1f2937;
+
+    color:white;
+
+}
+
+
+.setting{
+
+    padding:15px 0;
+
+    border-bottom:
+    1px solid #e5e7eb;
+
+}
+
+
+.setting button{
+
+    margin-top:8px;
+
+    padding:9px 12px;
+
+    border:
+    1px solid #d1d5db;
+
+    border-radius:8px;
+
+    background:white;
+
+}
+
+
+.dark .setting button{
+
+    background:#374151;
+
+    color:white;
+
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+
+    position:fixed;
+
+    left:0;
+    right:0;
+    bottom:6px;
+
+    text-align:center;
+
+    font-size:9px;
+
+    opacity:.55;
+
+    pointer-events:none;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     TOOLBAR
+========================= -->
+
+<header id="toolbar">
+
+
+    <div class="logo">
+        Zidolite Browser
+    </div>
+
+
+    <button
+        class="icon"
+        onclick="goBack()">
+
+        ←
+
+    </button>
+
+
+    <button
+        class="icon"
+        onclick="goForward()">
+
+        →
+
+    </button>
+
+
+    <button
+        class="icon"
+        onclick="reloadPage()">
+
+        ↻
+
+    </button>
+
+
+    <input
+        id="address"
+        type="text"
+        placeholder="Search Google or enter URL"
+        autocomplete="off"
+        spellcheck="false"
+        onkeydown="addressEnter(event)"
+    >
+
+
+    <button
+        class="icon"
+        onclick="goHome()">
+
+        ⌂
+
+    </button>
+
+
+    <button
+        class="icon"
+        onclick="newTab()">
+
+        ＋
+
+    </button>
+
+
+    <button
+        class="icon"
+        onclick="toggleSettings()">
+
+        ⚙
+
+    </button>
+
+
+</header>
+
+
+
+<!-- =========================
+     HOME PAGE
+========================= -->
+
+<main id="home">
+
+
+    <div class="title">
+
+        Zidolite Browser
+
+    </div>
+
+
+    <div class="engineLine">
+
+        Search Engine:
+
+        <button
+            onclick="toggleEngines()">
+
+            <span id="engineName">
+                Google
+            </span>
+
+            ▾
+
+        </button>
+
+    </div>
+
+
+    <div id="engines">
+
+
+        <button
+            class="engine"
+            onclick="selectEngine('google')">
+
+            Google
+
+        </button>
+
+
+        <button
+            class="engine"
+            onclick="selectEngine('bing')">
+
+            Bing
+
+        </button>
+
+
+        <button
+            class="engine"
+            onclick="selectEngine('yahoo')">
+
+            Yahoo
+
+        </button>
+
+
+        <button
+            class="engine"
+            onclick="selectEngine('duck')">
+
+            DuckDuckGo
+
+        </button>
+
+
+    </div>
+
+
+
+    <!-- SEARCH BOX -->
+
+    <div class="search">
+
+
+        <input
+            id="query"
+            type="text"
+            placeholder="Search the web"
+            autocomplete="off"
+            onkeydown="searchKey(event)"
+        >
+
+
+        <button
+            class="searchButton"
+            onclick="searchWeb()">
+
+            🔍
+
+        </button>
+
+
+    </div>
+
+
+
+    <!-- =====================
+         WEBSITE BUTTONS
+    ====================== -->
+
+    <div class="shortcuts">
+
+
+        <button
+            class="shortcut"
+            onclick="openGoogle()">
+
+            🌐 Google
+
+        </button>
+
+
+        <button
+            class="shortcut"
+            onclick="openYouTube()">
+
+            ▶ YouTube
+
+        </button>
+
+
+        <button
+            class="shortcut"
+            onclick="openFacebook()">
+
+            Facebook
+
+        </button>
+
+
+        <button
+            class="shortcut"
+            onclick="openWikipedia()">
+
+            Wikipedia
+
+        </button>
+
+
+        <button
+            class="shortcut"
+            onclick="openBing()">
+
+            Bing
+
+        </button>
+
+
+        <button
+            class="shortcut"
+            onclick="openYahoo()">
+
+            Yahoo
+
+        </button>
+
+
+    </div>
+
+
+</main>
+
+
+
+<!-- =========================
+     SETTINGS
+========================= -->
+
+<section id="settings">
+
+
+    <h3>
+        ⚙ Settings
+    </h3>
+
+
+    <div class="setting">
+
+        <b>Appearance</b>
+
+        <br>
+
+        <button onclick="toggleDark()">
+
+            Light / Dark
+
+        </button>
+
+    </div>
+
+
+    <div class="setting">
+
+        <b>Safe Search</b>
+
+        <br>
+
+        <button onclick="safeSearch()">
+
+            ON / OFF
+
+        </button>
+
+    </div>
+
+
+    <div class="setting">
+
+        <b>Browsing History</b>
+
+        <br>
+
+        <button onclick="clearHistory()">
+
+            Clear History
+
+        </button>
+
+    </div>
+
+
+    <div class="setting">
+
+        <b>Downloads</b>
+
+        <br>
+
+        <button onclick="downloads()">
+
+            Downloads
+
+        </button>
+
+    </div>
+
+
+    <div class="setting">
+
+        <b>Account</b>
+
+        <br>
+
+        <button onclick="login()">
+
+            Sign in with Google
+
+        </button>
+
+        <br>
+
+        <button onclick="createAccount()">
+
+            Create Account
+
+        </button>
+
+    </div>
+
+
+    <div class="setting">
+
+        <b>Owner Information</b>
+
+        <br>
+
+        <button onclick="owner()">
+
+            View
+
+        </button>
+
+    </div>
+
+
+    <div class="setting">
+
+        <b>Terms of Service</b>
+
+        <br>
+
+        <button onclick="terms()">
+
+            View
+
+        </button>
+
+    </div>
+
+
+    <div class="setting">
+
+        <button onclick="logout()">
+
+            Log out
+
+        </button>
+
+    </div>
+
+
+    <button
+        onclick="toggleSettings()">
+
+        Close
+
+    </button>
+
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    © Zidokia Company LTD 2026<br>
+
+    © Leftist Company LTD 2026<br>
+
+    arafatisaac539@gmail.com
+
+</footer>
+
+
+
+<script>
+
+/*
+==================================================
+IMPORTANT
+
+The functions below are connected to the
+Cordova InAppBrowser JavaScript you already added.
+
+==================================================
+*/
+
+
+function goBack(){
+
+    if(typeof currentBrowser !== "undefined"
+       && currentBrowser){
+
+        try{
+
+            currentBrowser.executeScript(
+                {
+                    code:
+                    "history.back();"
+                },
+                function(){}
+            );
+
+            return;
+
+        }catch(e){}
+
+    }
+
+}
+
+
+function goForward(){
+
+    if(typeof currentBrowser !== "undefined"
+       && currentBrowser){
+
+        try{
+
+            currentBrowser.executeScript(
+                {
+                    code:
+                    "history.forward();"
+                },
+                function(){}
+            );
+
+            return;
+
+        }catch(e){}
+
+    }
+
+}
+
+
+function reloadPage(){
+
+    if(typeof currentBrowser !== "undefined"
+       && currentBrowser){
+
+        try{
+
+            currentBrowser.executeScript(
+                {
+                    code:
+                    "location.reload();"
+                },
+                function(){}
+            );
+
+            return;
+
+        }catch(e){}
+
+    }
+
+}
+
+
+function toggleEngines(){
+
+    const menu =
+        document.getElementById("engines");
+
+    menu.style.display =
+        menu.style.display === "block"
+        ? "none"
+        : "block";
+
+}
+
+
+function toggleSettings(){
+
+    const settings =
+        document.getElementById("settings");
+
+    settings.style.display =
+        settings.style.display === "block"
+        ? "none"
+        : "block";
+
+}
+
+
+function toggleDark(){
+
+    document.body.classList.toggle("dark");
+
+}
+
+
+function safeSearch(){
+
+    alert(
+        "Safe Search setting changed."
+    );
+
+}
+
+
+function clearHistory(){
+
+    localStorage.removeItem(
+        "zidolite_history"
+    );
+
+    alert(
+        "Browsing history cleared."
+    );
+
+}
+
+
+function downloads(){
+
+    alert(
+        "Downloads are available through the Android download system."
+    );
+
+}
+
+
+function login(){
+
+    alert(
+        "Google Sign-In will be connected using secure OAuth."
+    );
+
+}
+
+
+function createAccount(){
+
+    alert(
+        "Create Account will use Google authentication."
+    );
+
+}
+
+
+function logout(){
+
+    alert(
+        "You have been logged out."
+    );
+
+}
+
+
+function owner(){
+
+    alert(
+        "Zidolite Browser was created by Arafat Isaac, born 30 Dec 2012, Pabna. He is the owner of Zidokia Company LTD."
+    );
+
+}
+
+
+function terms(){
+
+    alert(
+        "Zidolite Browser Terms of Service."
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>
