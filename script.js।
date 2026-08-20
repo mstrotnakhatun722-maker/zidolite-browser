@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<title>Zidolite Browser</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+    margin:0;
+    padding:0;
+    width:100%;
+    min-height:100%;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f5f7fb;
+    color:#111827;
+}
+
+body.dark{
+    background:#111827;
+    color:#f9fafb;
+}
+
+/* ==============================
+   TOP BAR
+============================== */
+
+#toolbar{
+
+    width:100%;
+    height:60px;
+
+    display:flex;
+    align-items:center;
+
+    gap:4px;
+    padding:6px 7px;
+
+    background:#ffffff;
+
+    box-shadow:
+        0 2px 12px rgba(0,0,0,.12);
+
+    position:sticky;
+    top:0;
+
+    z-index:1000;
+}
+
+.dark #toolbar{
+    background:#1f2937;
+}
+
+.logo{
+
+    font-size:16px;
+    font-weight:800;
+
+    white-space:nowrap;
+
+    margin-right:2px;
+}
+
+.icon{
+
+    width:36px;
+    height:36px;
+
+    border:0;
+    border-radius:50%;
+
+    background:transparent;
+
+    font-size:19px;
+
+    flex-shrink:0;
+}
+
+.icon:active{
+    background:#e5e7eb;
+}
+
+#address{
+
+    flex:1;
+    min-width:40px;
+
+    height:38px;
+
+    border:0;
+    outline:0;
+
+    border-radius:20px;
+
+    padding:0 14px;
+
+    background:#f1f3f5;
+
+    color:#111827;
+
+    font-size:14px;
+}
+
+.dark #address{
+
+    background:#374151;
+    color:#ffffff;
+
+}
+
+/* ==============================
+   HOME
+============================== */
+
+#home{
+
+    min-height:
+        calc(100vh - 60px);
+
+    padding:
+        55px 14px 95px;
+
+    text-align:center;
+}
+
+.title{
+
+    font-size:32px;
+    font-weight:800;
+
+    margin-bottom:30px;
+
+}
+
+/* ==============================
+   SEARCH ENGINE
+============================== */
+
+.engineLine{
+
+    max-width:650px;
+
+    margin:
+        0 auto 7px;
+
+    text-align:left;
+
+    font-size:12px;
+
+    opacity:.9;
+}
+
+.engineLine button{
+
+    border:0;
+    background:transparent;
+
+    color:#2563eb;
+
+    font-weight:700;
+
+    font-size:12px;
+
+}
+
+#engineMenu{
+
+    display:none;
+
+    max-width:650px;
+
+    margin:5px auto;
+
+    background:#ffffff;
+
+    border-radius:14px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 5px 25px rgba(0,0,0,.18);
+
+    text-align:left;
+}
+
+.dark #engineMenu{
+    background:#1f2937;
+}
+
+.engineItem{
+
+    width:100%;
+
+    padding:14px 16px;
+
+    border:0;
+
+    background:transparent;
+
+    color:inherit;
+
+    text-align:left;
+
+    font-size:14px;
+}
+
+.engineItem:active{
+    background:#e5e7eb;
+}
+
+/* ==============================
+   SEARCH BAR
+============================== */
+
+.search{
+
+    max-width:650px;
+
+    height:56px;
+
+    margin:auto;
+
+    display:flex;
+
+    align-items:center;
+
+    padding-left:18px;
+
+    background:#ffffff;
+
+    border-radius:30px;
+
+    box-shadow:
+        0 4px 20px rgba(0,0,0,.12);
+
+}
+
+.dark .search{
+    background:#374151;
+}
+
+#query{
+
+    flex:1;
+    min-width:0;
+
+    border:0;
+    outline:0;
+
+    background:transparent;
+
+    color:inherit;
+
+    font-size:16px;
+
+}
+
+.searchButton{
+
+    width:50px;
+    height:50px;
+
+    border:0;
+
+    background:transparent;
+
+    font-size:21px;
+}
+
+/* ==============================
+   QUICK LINKS
+============================== */
+
+.shortcuts{
+
+    max-width:700px;
+
+    margin:38px auto;
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+}
+
+.shortcut{
+
+    min-width:90px;
+
+    padding:14px 17px;
+
+    border:0;
+
+    border-radius:13px;
+
+    background:#ffffff;
+
+    color:#111827;
+
+    box-shadow:
+        0 3px 12px rgba(0,0,0,.10);
+
+    font-size:13px;
+
+}
+
+.dark .shortcut{
+
+    background:#374151;
+
+    color:#ffffff;
+
+}
+
+/* ==============================
+   SETTINGS
+============================== */
+
+#settings{
+
+    display:none;
+
+    position:fixed;
+
+    right:8px;
+    top:65px;
+
+    width:
+        min(330px, calc(100% - 16px));
+
+    max-height:
+        calc(100vh - 75px);
+
+    overflow:auto;
+
+    padding:18px;
+
+    background:#ffffff;
+
+    color:#111827;
+
+    border-radius:17px;
+
+    box-shadow:
+        0 8px 35px rgba(0,0,0,.30);
+
+    z-index:5000;
+
+}
+
+.dark #settings{
+
+    background:#1f2937;
+
+    color:#ffffff;
+
+}
+
+.setting{
+
+    padding:15px 0;
+
+    border-bottom:
+        1px solid #e5e7eb;
+
+}
+
+.dark .setting{
+
+    border-color:#374151;
+
+}
+
+.setting button{
+
+    margin-top:8px;
+
+    padding:9px 12px;
+
+    border:1px solid #d1d5db;
+
+    border-radius:8px;
+
+    background:#ffffff;
+
+}
+
+.dark .setting button{
+
+    background:#374151;
+
+    color:#ffffff;
+
+}
+
+/* ==============================
+   FOOTER
+============================== */
+
+footer{
+
+    position:fixed;
+
+    left:0;
+    right:0;
+    bottom:6px;
+
+    text-align:center;
+
+    font-size:9px;
+
+    opacity:.55;
+
+    pointer-events:none;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =================================
+     TOOLBAR
+================================= -->
+
+<header id="toolbar">
+
+    <div class="logo">
+        Zidolite Browser
+    </div>
+
+
+    <button
+        class="icon"
+        onclick="inAppBack()"
+        aria-label="Back">
+
+        ←
+
+    </button>
+
+
+    <button
+        class="icon"
+        onclick="inAppForward()"
+        aria-label="Forward">
+
+        →
+
+    </button>
+
+
+    <button
+        class="icon"
+        onclick="inAppReload()"
+        aria-label="Reload">
+
+        ↻
+
+    </button>
+
+
+    <input
+        id="address"
+        type="text"
+        placeholder="Search Google or enter URL"
+        autocomplete="off"
+        autocorrect="off"
+        spellcheck="false"
+        onkeydown="addressEnter(event)"
+    >
+
+
+    <button
+        class="icon"
+        onclick="goHome()"
+        aria-label="Home">
+
+        ⌂
+
+    </button>
+
+
+    <button
+        class="icon"
+        onclick="newTab()"
+        aria-label="New tab">
+
+        ＋
+
+    </button>
+
+
+    <button
+        class="icon"
+        onclick="toggleSettings()"
+        aria-label="Settings">
+
+        ⚙
+
+    </button>
+
+</header>
+
+
+
+<!-- =================================
+     HOME PAGE
+================================= -->
+
+<main id="home">
+
+
+    <div class="title">
+        Zidolite Browser
+    </div>
+
+
+    <div class="engineLine">
+
+        Search Engine:
+
+        <button onclick="toggleEngineMenu()">
+
+            <span id="engineName">
+                Google
+            </span>
+
+            ▾
+
+        </button>
+
+    </div>
+
+
+    <div id="engineMenu">
+
+
+        <button
+            class="engineItem"
+            onclick="selectEngine('google')">
+
+            🔎 Google
+
+        </button>
+
+
+        <button
+            class="engineItem"
+            onclick="selectEngine('bing')">
+
+            🔎 Bing
+
+        </button>
+
+
+        <button
+            class="engineItem"
+            onclick="selectEngine('yahoo')">
+
+            🔎 Yahoo
+
+        </button>
+
+
+        <button
+            class="engineItem"
+            onclick="selectEngine('duck')">
+
+            🔎 DuckDuckGo
+
+        </button>
+
+
+    </div>
+
+
+    <div class="search">
+
+
+        <input
+            id="query"
+            type="text"
+            placeholder="Search the web"
+            autocomplete="off"
+            onkeydown="searchEnter(event)"
+        >
+
+
+        <button
+            class="searchButton"
+            onclick="searchWeb()">
+
+            🔍
+
+        </button>
+
+
+    </div>
+
+
+
+    <div class="shortcuts">
+
+
+        <button
+            class="shortcut"
+            onclick="openWebsite(
+                'https://www.google.com'
+            )">
+
+            Google
+
+        </button>
+
+
+        <button
+            class="shortcut"
+            onclick="openWebsite(
+                'https://www.youtube.com'
+            )">
+
+            YouTube
+
+        </button>
+
+
+        <button
+            class="shortcut"
+            onclick="openWebsite(
+                'https://www.facebook.com'
+            )">
+
+            Facebook
+
+        </button>
+
+
+        <button
+            class="shortcut"
+            onclick="openWebsite(
+                'https://www.wikipedia.org'
+            )">
+
+            Wikipedia
+
+        </button>
+
+
+        <button
+            class="shortcut"
+            onclick="openWebsite(
+                'https://www.bing.com'
+            )">
+
+            Bing
+
+        </button>
+
+
+        <button
+            class="shortcut"
+            onclick="openWebsite(
+                'https://www.yahoo.com'
+            )">
+
+            Yahoo
+
+        </button>
+
+
+    </div>
+
+</main>
+
+
+
+<!-- =================================
+     SETTINGS
+================================= -->
+
+<section id="settings">
+
+
+    <h3>
+        ⚙ Zidolite Browser Settings
+    </h3>
+
+
+    <div class="setting">
+
+        <b>Appearance</b>
+
+        <br>
+
+        <button onclick="toggleDarkMode()">
+            Light / Dark
+        </button>
+
+    </div>
+
+
+    <div class="setting">
+
+        <b>Safe Search</b>
+
+        <br>
+
+        <button onclick="toggleSafeSearch()">
+
+            <span id="safeSearchText">
+                ON
+            </span>
+
+        </button>
+
+    </div>
+
+
+    <div class="setting">
+
+        <b>Browsing Data</b>
+
+        <br>
+
+        <button onclick="clearHistory()">
+            Clear History
+        </button>
+
+    </div>
+
+
+    <div class="setting">
+
+        <b>Downloads</b>
+
+        <br>
+
+        <button onclick="showDownloads()">
+            Downloads
+        </button>
+
+    </div>
+
+
+    <div class="setting">
+
+        <b>Account</b>
+
+        <br>
+
+        <button onclick="login()">
+            Sign in with Google
+        </button>
+
+        <br>
+
+        <button onclick="createAccount()">
+            Create Account
+        </button>
+
+    </div>
+
+
+    <div class="setting">
+
+        <b>Owner Information</b>
+
+        <br>
+
+        <button onclick="ownerInfo()">
+            View
+        </button>
+
+    </div>
+
+
+    <div class="setting">
+
+        <b>Terms of Service</b>
+
+        <br>
+
+        <button onclick="terms()">
+            View Terms
+        </button>
+
+    </div>
+
+
+    <div class="setting">
+
+        <button onclick="logout()">
+            Log out
+        </button>
+
+    </div>
+
+
+    <button onclick="toggleSettings()">
+        Close
+    </button>
+
+
+</section>
+
+
+
+<!-- =================================
+     FOOTER
+================================= -->
+
+<footer>
+
+    © Zidokia Company LTD 2026<br>
+
+    © Leftist Company LTD 2026<br>
+
+    arafatisaac539@gmail.com
+
+</footer>
+
+
+
+<script>
+
+/* ==========================================
+   ZIDOLITE BROWSER
+   CORDOVA INAPPBROWSER VERSION
+========================================== */
+
+
+/* ------------------------------------------
+   GLOBAL STATE
+------------------------------------------ */
+
+let currentBrowser = null;
+
+let engine =
+    localStorage.getItem(
+        "zidolite_engine"
+    ) || "google";
+
+let safeSearch =
+    localStorage.getItem(
+        "zidolite_safe_search"
+    ) !== "off";
+
+
+/* ------------------------------------------
+   ENGINE NAME
+------------------------------------------ */
+
+function updateEngineName(){
+
+    const names = {
+
+        google: "Google",
+
+        bing: "Bing",
+
+        yahoo: "Yahoo",
+
+        duck: "DuckDuckGo"
+
+    };
+
+    document.getElementById(
+        "engineName"
+    ).textContent =
+        names[engine] || "Google";
+
+}
+
+
+/* ------------------------------------------
+   SEARCH URL
+------------------------------------------ */
+
+function getSearchURL(text){
+
+    const query =
+        encodeURIComponent(text);
+
+
+    if(engine === "bing"){
+
+        return (
+            "https://www.bing.com/search?q="
+            + query
+        );
+
+    }
+
+
+    if(engine === "yahoo"){
+
+        return (
+            "https://search.yahoo.com/search?p="
+            + query
+        );
+
+    }
+
+
+    if(engine === "duck"){
+
+        return (
+            "https://duckduckgo.com/?q="
+            + query
+        );
+
+    }
+
+
+    /*
+       DEFAULT = GOOGLE
+    */
+
+    return (
+        "https://www.google.com/search?q="
+        + query
+    );
+
+}
+
+
+/* ------------------------------------------
+   OPEN WEBSITE
+------------------------------------------ */
+
+function openWebsite(url){
+
+    if(!url){
+        return;
+    }
+
+
+    /*
+       Make sure Cordova is ready.
+    */
+
+    if(
+        typeof cordova === "undefined" ||
+        !window.cordova
+    ){
+
+        /*
+           Browser fallback for testing
+           outside Cordova.
+        */
+
+        window.location.href = url;
+
+        return;
+
+    }
+
+
+    /*
+       Close previous InAppBrowser.
+    */
+
+    if(currentBrowser){
+
+        try{
+            currentBrowser.close();
+        }catch(e){}
+
+        currentBrowser = null;
+
+    }
+
+
+    /*
+       Open website inside the app.
+
+       IMPORTANT:
+
+       _blank here is the Cordova
+       InAppBrowser target.
+
+       This is NOT an HTML
+       target="_blank" link.
+    */
+
+    currentBrowser =
+        window.open(
+            url,
+            "_blank",
+            "location=yes," +
+            "toolbar=yes," +
+            "zoom=no," +
+            "hardwareback=yes," +
+            "hideurlbar=no"
+        );
+
+
+    if(!currentBrowser){
+
+        alert(
+            "Unable to open the website. " +
+            "Please make sure Cordova " +
+            "InAppBrowser is installed."
+        );
+
+        return;
+
+    }
+
+
+    /*
+       When the InAppBrowser closes.
+    */
+
+    currentBrowser.addEventListener(
+        "exit",
+        function(){
+
+            currentBrowser = null;
+
+        }
+    );
+
+
+    /*
+       Update address field.
+    */
+
+    document.getElementById(
+        "address"
+    ).value = url;
+
+
+    /*
+       Save history.
+    */
+
+    saveHistory(url);
+
+}
+
+
+/* ------------------------------------------
+   SEARCH
+------------------------------------------ */
+
+function searchWeb(){
+
+    const input =
+        document.getElementById(
+            "query"
+        );
+
+    const text =
+        input.value.trim();
+
+
+    if(!text){
+        return;
+    }
+
+
+    let url;
+
+
+    /*
+       Direct URL
+    */
+
+    if(
+        text.indexOf(
+            "https://"
+        ) === 0 ||
+
+        text.indexOf(
+            "http://"
+        ) === 0
+    ){
+
+        url = text;
+
+    }
+
+    /*
+       Search query
+    */
+
+    else{
+
+        url =
+            getSearchURL(text);
+
+    }
+
+
+    openWebsite(url);
+
+}
+
+
+/* ------------------------------------------
+   SEARCH ENTER
+------------------------------------------ */
+
+function searchEnter(event){
+
+    if(event.key === "Enter"){
+
+        searchWeb();
+
+    }
+
+}
+
+
+/* ------------------------------------------
+   ADDRESS BAR
+------------------------------------------ */
+
+function addressEnter(event){
+
+    if(event.key !== "Enter"){
+        return;
+    }
+
+
+    const input =
+        document.getElementById(
+            "address"
+        );
+
+    const text =
+        input.value.trim();
+
+
+    if(!text){
+        return;
+    }
+
+
+    if(
+        text.indexOf(
+            "https://"
+        ) === 0 ||
+
+        text.indexOf(
+            "http://"
+        ) === 0
+    ){
+
+        openWebsite(text);
+
+    }
+
+    else{
+
+        openWebsite(
+            getSearchURL(text)
+        );
+
+    }
+
+}
+
+
+/* ------------------------------------------
+   ENGINE MENU
+------------------------------------------ */
+
+function toggleEngineMenu(){
+
+    const menu =
+        document.getElementById(
+            "engineMenu"
+        );
+
+
+    if(
+        menu.style.display === "block"
+    ){
+
+        menu.style.display = "none";
+
+    }
+
+    else{
+
+        menu.style.display = "block";
+
+    }
+
+}
+
+
+/* ------------------------------------------
+   SELECT ENGINE
+------------------------------------------ */
+
+function selectEngine(value){
+
+    engine = value;
+
+
+    localStorage.setItem(
+        "zidolite_engine",
+        value
+    );
+
+
+    updateEngineName();
+
+
+    document.getElementById(
+        "engineMenu"
+    ).style.display = "none";
+
+}
+
+
+/* ------------------------------------------
+   INAPPBROWSER BACK
+------------------------------------------ */
+
+function inAppBack(){
+
+    if(!currentBrowser){
+
+        return;
+
+    }
+
+
+    try{
+
+        currentBrowser.executeScript(
+            {
+                code:
+                    "history.back();"
+            },
+            function(){}
+
+        );
+
+    }catch(e){}
+
+}
+
+
+/* ------------------------------------------
+   INAPPBROWSER FORWARD
+------------------------------------------ */
+
+function inAppForward(){
+
+    if(!currentBrowser){
+
+        return;
+
+    }
+
+
+    try{
+
+        currentBrowser.executeScript(
+            {
+                code:
+                    "history.forward();"
+            },
+            function(){}
+
+        );
+
+    }catch(e){}
+
+}
+
+
+/* ------------------------------------------
+   INAPPBROWSER RELOAD
+------------------------------------------ */
+
+function inAppReload(){
+
+    if(!currentBrowser){
+
+        return;
+
+    }
+
+
+    try{
+
+        currentBrowser.executeScript(
+            {
+                code:
+                    "location.reload();"
+            },
+            function(){}
+
+        );
+
+    }catch(e){}
+
+}
+
+
+/* ------------------------------------------
+   HOME
+------------------------------------------ */
+
+function goHome(){
+
+    if(currentBrowser){
+
+        try{
+            currentBrowser.close();
+        }catch(e){}
+
+        currentBrowser = null;
+
+    }
+
+}
+
+
+/* ------------------------------------------
+   NEW TAB
+------------------------------------------ */
+
+function newTab(){
+
+    /*
+       In this first version,
+       a new tab means opening a fresh
+       InAppBrowser session.
+    */
+
+    openWebsite(
+        "https://www.google.com"
+    );
+
+}
+
+
+/* ------------------------------------------
+   SETTINGS
+------------------------------------------ */
+
+function toggleSettings(){
+
+    const panel =
+        document.getElementById(
+            "settings"
+        );
+
+
+    if(
+        panel.style.display === "block"
+    ){
+
+        panel.style.display = "none";
+
+    }
+
+    else{
+
+        panel.style.display = "block";
+
+    }
+
+}
+
+
+/* ------------------------------------------
+   DARK MODE
+------------------------------------------ */
+
+function toggleDarkMode(){
+
+    document.body.classList.toggle(
+        "dark"
+    );
+
+
+    localStorage.setItem(
+        "zidolite_dark",
+        document.body.classList.contains(
+            "dark"
+        )
+        ? "on"
+        : "off"
+    );
+
+}
+
+
+/* ------------------------------------------
+   SAFE SEARCH
+------------------------------------------ */
+
+function toggleSafeSearch(){
+
+    safeSearch = !safeSearch;
+
+
+    localStorage.setItem(
+        "zidolite_safe_search",
+        safeSearch
+        ? "on"
+        : "off"
+    );
+
+
+    document.getElementById(
+        "safeSearchText"
+    ).textContent =
+        safeSearch ? "ON" : "OFF";
+
+}
+
+
+/* ------------------------------------------
+   HISTORY
+------------------------------------------ */
+
+function saveHistory(url){
+
+    let history;
+
+
+    try{
+
+        history =
+            JSON.parse(
+                localStorage.getItem(
+                    "zidolite_history"
+                ) || "[]"
+            );
+
+    }catch(e){
+
+        history = [];
+
+    }
+
+
+    history.unshift(url);
+
+
+    /*
+       Remove duplicates.
+    */
+
+    history =
+        [...new Set(history)];
+
+
+    /*
+       Keep last 200 entries.
+    */
+
+    history =
+        history.slice(0,200);
+
+
+    localStorage.setItem(
+        "zidolite_history",
+        JSON.stringify(history)
+    );
+
+}
+
+
+function clearHistory(){
+
+    localStorage.removeItem(
+        "zidolite_history"
+    );
+
+
+    alert(
+        "Browsing history cleared."
+    );
+
+}
+
+
+/* ------------------------------------------
+   DOWNLOADS
+------------------------------------------ */
+
+function showDownloads(){
+
+    alert(
+        "Downloads will be handled by " +
+        "the Cordova Android download layer."
+    );
+
+}
+
+
+/* ------------------------------------------
+   GOOGLE LOGIN
+------------------------------------------ */
+
+function login(){
+
+    alert(
+        "Google account login will be " +
+        "connected through a secure OAuth " +
+        "implementation."
+    );
+
+}
+
+
+func
